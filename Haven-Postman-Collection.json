@@ -1,0 +1,469 @@
+{
+  "info": {
+    "name": "🌿 Haven API",
+    "description": "Complete API collection for Haven - Notes & Journal App\n\nHow to use:\n1. Start your backend first (npm run dev)\n2. Run the Register request first\n3. Copy the token from the response\n4. Paste it in the Authorization header for other requests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Create a new Haven account.\n\nExpected response:\n- success: true\n- token: your JWT token (copy this!)\n- user: your user info"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login to your Haven account.\n\nExpected response:\n- success: true\n- token: your JWT token (copy this!)"
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/auth/me",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "me"]
+            },
+            "description": "Get the currently logged in user.\n\nRequires: Authorization header with Bearer token"
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/health",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "health"]
+            },
+            "description": "Check if the backend server is running.\n\nNo token needed!\nExpected response: { status: 'Haven is running!' }"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📝 Notes",
+      "item": [
+        {
+          "name": "Get All Notes",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes"]
+            },
+            "description": "Get all your notes.\n\nOptional query params:\n- ?search=keyword\n- ?pinned=true\n- ?archived=true\n- ?tag=tagname"
+          }
+        },
+        {
+          "name": "Get All Notes (Search)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes?search=hello",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes"],
+              "query": [{ "key": "search", "value": "hello" }]
+            },
+            "description": "Search your notes by keyword"
+          }
+        },
+        {
+          "name": "Create Note",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My First Note\",\n  \"content\": \"This is my note content with **bold** and *italic* text.\",\n  \"tags\": [\"personal\", \"test\"],\n  \"isPinned\": false\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/notes",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes"]
+            },
+            "description": "Create a new note.\n\nRequired: title\nOptional: content, tags, isPinned, color"
+          }
+        },
+        {
+          "name": "Update Note",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Title\",\n  \"content\": \"Updated content\",\n  \"isPinned\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes", "PASTE_NOTE_ID_HERE"]
+            },
+            "description": "Update an existing note.\n\nReplace PASTE_NOTE_ID_HERE with the _id from Get All Notes response"
+          }
+        },
+        {
+          "name": "Delete Note (Move to Trash)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes", "PASTE_NOTE_ID_HERE"]
+            },
+            "description": "Move a note to trash (soft delete).\n\nReplace PASTE_NOTE_ID_HERE with the actual note ID"
+          }
+        },
+        {
+          "name": "Get Trash",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes/trash",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes", "trash"]
+            },
+            "description": "Get all notes in trash"
+          }
+        },
+        {
+          "name": "Restore Note from Trash",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE/restore",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes", "PASTE_NOTE_ID_HERE", "restore"]
+            },
+            "description": "Restore a note from trash"
+          }
+        },
+        {
+          "name": "Permanently Delete Note",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE/permanent",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes", "PASTE_NOTE_ID_HERE", "permanent"]
+            },
+            "description": "Permanently delete a note — cannot be undone!"
+          }
+        },
+        {
+          "name": "Share Note",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE/share",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes", "PASTE_NOTE_ID_HERE", "share"]
+            },
+            "description": "Generate a shareable link for a note"
+          }
+        },
+        {
+          "name": "Export Note",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE/export?format=md",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes", "PASTE_NOTE_ID_HERE", "export"],
+              "query": [{ "key": "format", "value": "md" }]
+            },
+            "description": "Export a note as .md or .txt\n\nChange format=md to format=txt for plain text"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📖 Journal",
+      "item": [
+        {
+          "name": "Get All Journal Entries",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/journal",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "journal"]
+            },
+            "description": "Get all journal entries.\n\nResponse also includes:\n- prompts: 25 writing prompts\n- streak: your current streak\n- dailyWordGoal: your word goal"
+          }
+        },
+        {
+          "name": "Create Journal Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My First Journal Entry\",\n  \"content\": \"Today was a great day!\",\n  \"mood\": { \"emoji\": \"😊\", \"label\": \"Happy\" },\n  \"tags\": [\"daily\", \"happy\"],\n  \"isPinned\": false,\n  \"isLocked\": false\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/journal",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "journal"]
+            },
+            "description": "Create a new journal entry.\n\nFor locked entry add:\n- isLocked: true\n- pin: \"1234\""
+          }
+        },
+        {
+          "name": "Create Locked Journal Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Private Entry\",\n  \"content\": \"This is a secret entry!\",\n  \"mood\": { \"emoji\": \"😌\", \"label\": \"Calm\" },\n  \"isLocked\": true,\n  \"pin\": \"1234\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/journal",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "journal"]
+            },
+            "description": "Create a PIN-locked private journal entry"
+          }
+        },
+        {
+          "name": "Update Journal Entry",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Entry\",\n  \"content\": \"Updated content here\",\n  \"mood\": { \"emoji\": \"🤩\", \"label\": \"Excited\" }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/journal/PASTE_ENTRY_ID_HERE",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "journal", "PASTE_ENTRY_ID_HERE"]
+            },
+            "description": "Update a journal entry"
+          }
+        },
+        {
+          "name": "Delete Journal Entry",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/journal/PASTE_ENTRY_ID_HERE",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "journal", "PASTE_ENTRY_ID_HERE"]
+            },
+            "description": "Move journal entry to trash"
+          }
+        },
+        {
+          "name": "Unlock Journal Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pin\": \"1234\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/journal/PASTE_ENTRY_ID_HERE/unlock",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "journal", "PASTE_ENTRY_ID_HERE", "unlock"]
+            },
+            "description": "Unlock a PIN-protected journal entry"
+          }
+        },
+        {
+          "name": "Get Calendar",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/journal/calendar?year=2024",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "journal", "calendar"],
+              "query": [{ "key": "year", "value": "2024" }]
+            },
+            "description": "Get journal entries grouped by date for the calendar view"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧪 Validation Tests",
+      "item": [
+        {
+          "name": "Test - Empty Username (should fail)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "register"]
+            },
+            "description": "❌ This should FAIL with:\n{ field: 'username', message: 'Username is required.' }"
+          }
+        },
+        {
+          "name": "Test - Short Password (should fail)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "register"]
+            },
+            "description": "❌ This should FAIL with:\n{ field: 'password', message: 'Password must be at least 6 characters.' }"
+          }
+        },
+        {
+          "name": "Test - Wrong Password Login (should fail)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"wrongpassword\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "login"]
+            },
+            "description": "❌ This should FAIL with:\n{ field: 'password', message: 'Incorrect password. Please try again.' }"
+          }
+        },
+        {
+          "name": "Test - No Token (should fail)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/notes",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notes"]
+            },
+            "description": "❌ This should FAIL with:\n{ message: 'Not authorized' }\n\nProves middleware is working!"
+          }
+        }
+      ]
+    }
+  ]
+}

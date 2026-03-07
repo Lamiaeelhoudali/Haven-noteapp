@@ -190,6 +190,40 @@ Haven uses your own local database, so **there are no pre-made accounts**. When 
 
 ---
 
+## 🧪 API Testing with Postman
+
+The file `Haven-Postman-Collection.json` is included to test all backend endpoints directly.
+
+### How to use it:
+
+1. Open Postman → click **Import** → select `Haven-Postman-Collection.json`
+2. Make sure your backend is running (`npm run dev`)
+3. Run **Health Check** first to confirm the server is up — expected response: `{ "status": "Haven is running!" }`
+4. Run **Login** → copy the `token` value from the response
+5. Paste it in the **Headers** tab of any protected request:
+```
+Authorization: Bearer YOUR_TOKEN_HERE
+```
+
+> ⚠️ The token expires after a while. If you get `"Token invalid"`, just run **Login** again and copy the new token.
+
+### Endpoints covered:
+
+| Group | Endpoints |
+|-------|-----------|
+| 🔐 Authentication | Register, Login, Get Current User, Health Check |
+| 📝 Notes | Create, Get All, Update, Delete (Trash), Restore, Permanently Delete |
+| 📖 Journal | Create, Create Locked, Get All, Update, Delete, Unlock, Get Calendar |
+| 🧪 Validation | Tests that are expected to fail (wrong password, missing token, etc.) |
+
+### Important tips:
+- **Register** and **Health Check** do not need a token
+- All other requests require `Bearer YOUR_TOKEN` in the **Headers** tab
+- For Update, Delete, Restore, and Unlock — replace `:id` in the URL with the actual `_id` from a previous response
+- Run **Get All Notes** or **Get All Journal Entries** if you need to find an ID
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -253,6 +287,8 @@ Haven/
 | Stars not showing | Hard refresh: Ctrl + Shift + R (Windows) or Cmd + Shift + R (Mac) |
 | brew command not found (Mac) | Homebrew isn't installed — follow Step 3 in the Mac instructions above |
 | MongoDB won't start on Mac | Run `brew services restart mongodb-community` in Terminal |
+| Token invalid in Postman | Run Login again and copy the new token — tokens expire after 7 days |
+| Entry/Note not found in Postman | Copy the `_id` from Get All Notes or Get All Journal Entries and use that in the URL |
 
 ---
 
@@ -267,6 +303,7 @@ Haven/
 | Axios | HTTP requests |
 | CSS @keyframes | All animations |
 | Lucide React | Icons |
+| Postman | API testing |
 
 ---
 
@@ -281,5 +318,7 @@ Haven was by far the most challenging project I have worked on. Previous assignm
 The biggest challenge was turning an idea into an actual working product. It sounds simple, but the gap between imagining something and actually building it is huge. Every feature that looks easy from the outside — the interactive calendar, the theme switcher, the delete functionality, the animations on the login page — had its own set of problems that needed real patience and persistence to solve.
 
 There were moments where nothing was working, where something I changed refused to reflect on screen, where I had to dig through the code just to understand why. But every single one of those moments had a breakthrough on the other side.
+
+The Postman testing phase turned out to be one of the hardest parts of the entire project — and honestly one I did not expect to struggle with. Testing every endpoint required understanding how JWT authentication flows through every single request. Tokens expired mid-testing, IDs had to be copied carefully from one response and used in the next request, and a single wrong value in the URL or header would fail the whole request. It taught me that building an API is only half the work — verifying that it actually works end to end, under real conditions, is just as important and just as difficult.
 
 Haven taught me that building something real is not just about writing code — it is about problem solving, patience, and refusing to settle until it works the way you envisioned it. That is the kind of developer I want to be, and this project made me feel like I am heading in the right direction.
