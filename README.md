@@ -135,7 +135,7 @@ npm start
 
 Haven uses your own local database, so **there are no pre-made accounts**. When the app opens in your browser:
 
-1. Click **Sign Up** to create a new account (any username and password works)
+1. Click **Sign Up** to create a new account (any email and password works)
 2. Log in with those credentials
 3. You're in — all your data stays local on your machine
 
@@ -175,7 +175,6 @@ Haven uses your own local database, so **there are no pre-made accounts**. When 
 - 25 writing prompts
 - Daily word goal bar
 - Tags, Pin, Archive
-- Trash with restore
 
 ### 🎨 Appearance
 - 8 color themes
@@ -272,3 +271,15 @@ Haven/
 ---
 
 *Made with 🌿 and a lot of care*
+
+---
+
+## 📝 Reflection
+
+Haven was by far the most challenging project I have worked on. Previous assignments felt difficult at the time, but this one was a completely different level — it pushed me in ways I did not expect.
+
+The biggest challenge was turning an idea into an actual working product. It sounds simple, but the gap between imagining something and actually building it is huge. Every feature that looks easy from the outside — the interactive calendar, the theme switcher, the delete functionality, the animations on the login page — had its own set of problems that needed real patience and persistence to solve.
+
+There were moments where nothing was working, where something I changed refused to reflect on screen, where I had to dig through the code just to understand why. But every single one of those moments had a breakthrough on the other side.
+
+Haven taught me that building something real is not just about writing code — it is about problem solving, patience, and refusing to settle until it works the way you envisioned it. That is the kind of developer I want to be, and this project made me feel like I am heading in the right direction.
