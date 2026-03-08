@@ -112,13 +112,8 @@ exports.exportNote = async (req, res, next) => {
   try {
     const note = await Note.findOne({ _id: req.params.id, user: req.user._id });
     if (!note) return res.status(404).json({ success: false, message: 'Note not found.' });
-    const format = req.query.format || 'md';
-    if (!['md', 'txt'].includes(format))
-      return res.status(400).json({ success: false, message: 'Export format must be "md" or "txt".' });
-    const content = format === 'md'
-      ? `# ${note.title}\n\n${note.content}`
-      : `${note.title}\n\n${note.content.replace(/[#*`_]/g, '')}`;
-    res.setHeader('Content-Disposition', `attachment; filename="${note.title || 'note'}.${format}"`);
+    const content = `${note.title}\n\n${note.content.replace(/[#*`_]/g, '')}`;
+    res.setHeader('Content-Disposition', `attachment; filename="${note.title || 'note'}.txt"`);
     res.setHeader('Content-Type', 'text/plain');
     res.send(content);
   } catch (error) { next(error); }

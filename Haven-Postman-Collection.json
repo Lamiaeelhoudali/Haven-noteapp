@@ -243,19 +243,19 @@
               { "key": "Authorization", "value": "Bearer PASTE_YOUR_TOKEN_HERE" }
             ],
             "url": {
-              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE/export?format=md",
+              "raw": "http://localhost:5000/api/notes/PASTE_NOTE_ID_HERE/export?format=txt",
               "host": ["localhost"],
               "port": "5000",
               "path": ["api", "notes", "PASTE_NOTE_ID_HERE", "export"],
-              "query": [{ "key": "format", "value": "md" }]
+              "query": [{ "key": "format", "value": "txt" }]
             },
-            "description": "Export a note as .md or .txt\n\nChange format=md to format=txt for plain text"
+            "description": "Export a note as .txt" 
           }
         }
       ]
     },
     {
-      "name": "📖 Journal",
+      "namde": "📖 Journal",
       "item": [
         {
           "name": "Get All Journal Entries",

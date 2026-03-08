@@ -164,7 +164,7 @@ Haven uses your own local database, so **there are no pre-made accounts**. When 
 - Bold, Italic, Headings, Lists, Checkboxes, Images
 - Pin, Archive, Tag, Search
 - 10 background styles per note
-- Share via link, Export as .md or .txt
+- Share via link, Export as .txt
 - Trash with restore
 
 ### 📖 Journal
@@ -308,17 +308,3 @@ Haven/
 ---
 
 *Made with 🌿 and a lot of care*
-
----
-
-## 📝 Reflection
-
-Haven was by far the most challenging project I have worked on. Previous assignments felt difficult at the time, but this one was a completely different level — it pushed me in ways I did not expect.
-
-The biggest challenge was turning an idea into an actual working product. It sounds simple, but the gap between imagining something and actually building it is huge. Every feature that looks easy from the outside — the interactive calendar, the theme switcher, the delete functionality, the animations on the login page — had its own set of problems that needed real patience and persistence to solve.
-
-There were moments where nothing was working, where something I changed refused to reflect on screen, where I had to dig through the code just to understand why. But every single one of those moments had a breakthrough on the other side.
-
-The Postman testing phase turned out to be one of the hardest parts of the entire project — and honestly one I did not expect to struggle with. Testing every endpoint required understanding how JWT authentication flows through every single request. Tokens expired mid-testing, IDs had to be copied carefully from one response and used in the next request, and a single wrong value in the URL or header would fail the whole request. It taught me that building an API is only half the work — verifying that it actually works end to end, under real conditions, is just as important and just as difficult.
-
-Haven taught me that building something real is not just about writing code — it is about problem solving, patience, and refusing to settle until it works the way you envisioned it. That is the kind of developer I want to be, and this project made me feel like I am heading in the right direction.
