@@ -563,6 +563,60 @@ a { text-decoration: none; }
 .bg-swatch:hover { transform: scale(1.12); }
 .bg-swatch.selected { border-color: var(--accent); }
 
+/* ── TOOLBAR TOOLTIPS ───────────────────────────────────── */
+.toolbar-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.toolbar-tooltip {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  transform: none;
+  background: var(--text-primary);
+  color: var(--bg-card);
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+  width: 200px;
+  z-index: 999;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  flex-direction: column;
+  gap: 0.25rem;
+  pointer-events: none;
+}
+.toolbar-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 16px;
+  transform: none;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid var(--text-primary);
+}
+.toolbar-tooltip strong {
+  font-size: 0.82rem;
+  color: #ffffff;
+}
+.toolbar-tooltip span {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+.toolbar-tooltip code {
+  font-size: 0.72rem;
+  background: rgba(255,255,255,0.15);
+  border-radius: 5px;
+  padding: 0.15rem 0.4rem;
+  color: #a8d8ff;
+  margin-top: 0.1rem;
+  font-family: monospace;
+}
+.toolbar-tooltip-wrap:hover .toolbar-tooltip {
+  display: flex;
+}
+
 /* ── MISC ───────────────────────────────────────────────── */
 .section-title { font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-primary); }
 .empty-state { text-align: center; padding: 3.5rem 2rem; color: var(--text-muted); }

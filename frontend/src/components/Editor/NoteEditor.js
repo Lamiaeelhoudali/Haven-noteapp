@@ -185,13 +185,34 @@ export default function NoteEditor({ note, onClose, onSaved }) {
       {/* Toolbar (write mode only) */}
       {viewMode === 'write' && (
         <div className="editor-toolbar">
-          <button className="toolbar-btn" onClick={() => insertAtCursor('**', '**', 'bold text')} title="Bold"><strong>B</strong></button>
-          <button className="toolbar-btn" onClick={() => insertAtCursor('*', '*', 'italic text')} title="Italic"><em>I</em></button>
-          <button className="toolbar-btn" onClick={() => insertAtCursor('# ', '', 'Heading 1')} title="Heading 1">H1</button>
-          <button className="toolbar-btn" onClick={() => insertAtCursor('## ', '', 'Heading 2')} title="Heading 2">H2</button>
-          <button className="toolbar-btn" onClick={() => insertAtCursor('- ', '', 'List item')} title="Bullet list">• List</button>
-          <button className="toolbar-btn" onClick={() => insertAtCursor('- [ ] ', '', 'Task')} title="Checkbox task">☐ Task</button>
-          <button className="toolbar-btn" onClick={() => setShowImageModal(true)} title="Insert image"><ImageIcon size={13} /> Image</button>
+          <div className="toolbar-tooltip-wrap">
+            <button className="toolbar-btn" onClick={() => insertAtCursor('**', '**', 'bold text')}><strong>B</strong></button>
+            <div className="toolbar-tooltip"><strong>Bold</strong><span>Select a word then click B to make it bold</span><code>**your text**</code></div>
+          </div>
+          <div className="toolbar-tooltip-wrap">
+            <button className="toolbar-btn" onClick={() => insertAtCursor('*', '*', 'italic text')}><em>I</em></button>
+            <div className="toolbar-tooltip"><strong>Italic</strong><span>Select a word then click I to make it italic</span><code>*your text*</code></div>
+          </div>
+          <div className="toolbar-tooltip-wrap">
+            <button className="toolbar-btn" onClick={() => insertAtCursor('# ', '', 'Heading 1')}>H1</button>
+            <div className="toolbar-tooltip"><strong>Heading 1</strong><span>Click to add a large title heading</span><code># Your heading</code></div>
+          </div>
+          <div className="toolbar-tooltip-wrap">
+            <button className="toolbar-btn" onClick={() => insertAtCursor('## ', '', 'Heading 2')}>H2</button>
+            <div className="toolbar-tooltip"><strong>Heading 2</strong><span>Click to add a smaller section heading</span><code>## Your heading</code></div>
+          </div>
+          <div className="toolbar-tooltip-wrap">
+            <button className="toolbar-btn" onClick={() => insertAtCursor('- ', '', 'List item')}>• List</button>
+            <div className="toolbar-tooltip"><strong>Bullet List</strong><span>Click to add a bullet point item</span><code>- list item</code></div>
+          </div>
+          <div className="toolbar-tooltip-wrap">
+            <button className="toolbar-btn" onClick={() => insertAtCursor('- [ ] ', '', 'Task')}>☐ Task</button>
+            <div className="toolbar-tooltip"><strong>Checkbox Task</strong><span>Click to add a checkbox — great for to-do lists!</span><code>- [ ] task item</code></div>
+          </div>
+          <div className="toolbar-tooltip-wrap">
+            <button className="toolbar-btn" onClick={() => setShowImageModal(true)}><ImageIcon size={13} /> Image</button>
+            <div className="toolbar-tooltip"><strong>Insert Image</strong><span>Click to add an image by URL or from your computer</span></div>
+          </div>
 
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             {/* Background picker */}
